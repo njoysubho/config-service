@@ -24,6 +24,8 @@ import static org.springframework.core.env.StandardEnvironment.SYSTEM_ENVIRONMEN
 public class ConfigController {
     @Value("${my.dummy.property}")
     private String property;
+    @Value("${my.dummy.property2}")
+    private String property2;
 
     @Autowired
     private AwsParamStorePropertySourceLocator locator;
@@ -31,11 +33,11 @@ public class ConfigController {
     private ConfigurableEnvironment env;
 
 
-    @GetMapping("/config")
-    private String getProperty(){
-        return property;
+    @GetMapping("/config/{property}")
+    private String getProperty(@PathVariable("property")String propertyName){
+        return env.getProperty(propertyName);
     }
-    
+
     @GetMapping(path = "/config/{application}/{profile}")
     public MutablePropertySources getEnvironment(@PathVariable("application")String application,@PathVariable("profile")String profile){
 
