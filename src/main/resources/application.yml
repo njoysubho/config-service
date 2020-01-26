@@ -1,0 +1,8 @@
+spring.application.name: my-service
+spring.profiles.active: production,ecs
+
+management.endpoints.web.exposure.include: "*"
+spring:
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
